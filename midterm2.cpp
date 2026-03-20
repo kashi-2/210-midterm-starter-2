@@ -141,12 +141,12 @@ public:
         Node* current = head;
 
         if (!current) {
-            cout << "    (empty)\n";
+            cout << "        (empty)\n";
             return;
         }
 
         while (current) {
-            cout << "    " << current->data << endl;
+            cout << "        " << current->data << "\n";
             current = current->next;
         }
     } 
