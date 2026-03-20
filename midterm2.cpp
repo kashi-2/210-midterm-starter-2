@@ -30,8 +30,7 @@ private:
 public:
     DoublyLinkedList() { head = nullptr; tail = nullptr; }
 
-    
-    void push_back(int v) {
+    void push_back(string v) {
         Node* newNode = new Node(v);
         if (!tail)
             head = tail = newNode;
@@ -42,7 +41,7 @@ public:
         }
     }
     
-    void push_front(int v) {
+    void push_front(string v) {
         Node* newNode = new Node(v);
         if (!head)
             head = tail = newNode;
@@ -55,28 +54,23 @@ public:
     
     void pop_front() {
 
-        if (!head) {
-            cout << "List is empty." << endl;
-            return;
-        }
+        if (!head) return;
 
-        Node * temp = head;
+        Node* temp = head;
 
         if (head->next) {
             head = head->next;
             head->prev = nullptr;
-        }
+        } 
         else
             head = tail = nullptr;
         delete temp;
     }
 
     void pop_back() {
-        if (!tail) {
-            cout << "List is empty." << endl;
-            return;
-        }
-        Node * temp = tail;
+        if (!tail) return;
+        
+        Node* temp = tail;
 
         if (tail->prev) {
             tail = tail->prev;
