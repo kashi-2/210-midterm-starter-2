@@ -201,7 +201,7 @@ int main() {
     //the first 5 customers
     for (int i = 0; i < 5; i++) {
         string name = getRandomName(names);
-        cout << "    " << name << "    joins the line\n";
+        cout << "    " << name << " joins the line\n";
         line.push_back(name);
     }
     
@@ -218,7 +218,7 @@ int main() {
         prob = rand() % 100 + 1;
         if (prob <= 40 && !line.isEmpty()) {
             string name = line.getFront();
-            cout << "    " << name << "is served\n";
+            cout << "    " << name << " is served\n";
             line.pop_front();
         }
 
@@ -248,7 +248,7 @@ int main() {
         prob = rand() % 100 + 1;
         if (prob <= 10) {
             string name = getRandomName(names);
-            cout << "   " << name << " (VIP) joins the front of the line\n";
+            cout << "    " << name << " (VIP) joins the front of the line\n";
             line.push_front(name);
         }
         
