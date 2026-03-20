@@ -127,4 +127,84 @@ public:
             count++;
             temp = temp->next;
         }
+        int index = rand() % count;
+
+        temp = head;
+        for (int i = 0; i < index; i++)
+            temp = temp->next;
+
+        cout << "    " << temp->data << " left the line\n";
+        delete_val(temp->data);
+    } 
+
+    void print() {
+        Node* current = head;
+
+        if (!current) {
+            cout << "    (empty)\n";
+            return;
+        }
+
+        while (current) {
+            cout << "    " << current->data << endl;
+            current = current->next;
+        }
+    } 
+
+    //every other element
+    void every_other_element() {
+        Node* current = head;
+        bool printFlag = true;
+
+        while (current) {
+            if (printFlag) 
+            cout << current->data << " ";
+
+            printFlag = !printFlag;
+            current = current->next;
+        }
+        cout << endl;
     }
+};
+
+//loading names from file
+void loadNames(vector<string>& names) {
+    ifstream fin("names.txt");
+
+    if (!fin) {
+        cout << "Error opening names file.\n";
+        return;
+    }
+
+    string name;
+    while (fin >> name)
+        names.push_back(name);
+    
+    fin.close();
+}
+
+//Getting random name
+string getRandomName(const vector<string>& names) {
+    return names[rand() % names.size()];
+}
+
+int main() {
+    srand(time(0));
+
+    vector<string> names;
+    loadNames(names);
+
+    DoublyLinkedList line;
+
+    cout << "Store opens:\n";
+
+    //the first 5 customers
+    for (int i = 0; i < 5; i++) {
+        string name = getRandomName(names);
+        cout << "    " << name << " joins the line\n";
+        line.push_back(name);
+    }
+    
+    cout << "    Resulting line:\n";
+    line.print();
+}
