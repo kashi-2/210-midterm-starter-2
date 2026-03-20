@@ -201,10 +201,60 @@ int main() {
     //the first 5 customers
     for (int i = 0; i < 5; i++) {
         string name = getRandomName(names);
-        cout << "    " << name << " joins the line\n";
+        cout << "    " << name << "    joins the line\n";
         line.push_back(name);
     }
     
     cout << "    Resulting line:\n";
     line.print();
+
+    //simulation for 20mins
+    for (int t = 2; t <= 20; t++) {
+        cout << "Time step #" << t << ":\n";
+
+        int prob;
+
+        //40% served
+        prob = rand() % 100 + 1;
+        if (prob <= 40 && !line.isEmpty()) {
+            string name = line.getFront();
+            cout << "    " << name << "is served\n";
+            line.pop_front();
+        }
+
+        //60% new customer 
+        prob = rand() % 100 + 1;
+        if (prob <= 60) {
+            string name = getRandomName(names);
+            cout << "    " << name << " joins the line\n";
+            line.push_back(name);
+        }
+
+        // 20% rear leaves
+        prob = rand() % 100 + 1;
+        if (prob <= 20 && !line.isEmpty()) {
+            string name = line.getBack();
+            cout << "     " << name << " (at the rear) left the line\n";
+            line.pop_back();
+        }
+
+        //10% random leaves 
+        prob = rand() % 100 + 1;
+        if (prob <= 10) {
+            line.remove_random();
+        }
+
+        //10% VIP
+        prob = rand() % 100 + 1;
+        if (prob <= 10) {
+            string name = getRandomName(names);
+            cout << "   " << name << " (VIP) joins the front of the line\n";
+            line.push_front(name);
+        }
+        
+        cout << "    Resulting line:\n";
+        line.print();
+    }
+
+    return 0;
 }
