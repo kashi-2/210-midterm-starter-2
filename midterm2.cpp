@@ -79,6 +79,52 @@ public:
         else
             head = tail = nullptr;
         delete temp;
+    } 
+
+    void delete_val(string value) {
+        Node* temp = head;
+
+        while (temp && temp->data != value)
+            temp = temp->next;
+
+        if (!temp) return;
+
+        if (temp->prev)
+            temp->prev->next = temp->next;
+        else 
+            head = temp->next;
+
+        if (temp->next)
+            temp->next->prev = temp->prev;
+        else
+            tail = temp->prev;
+        
+        delete temp;
+    } 
+
+    bool isEmpty() {
+        return head == nullptr;
     }
 
-   
+    string getFront() {
+        if (head) return head->data;
+        return "";
+    }
+
+    string getBack() {
+        if (tail) return tail->data;
+        return "";
+    }
+
+    //removing the random person (10%)
+    void remove_random() {
+        if (!head) return;
+
+        int count = 0;
+        Node* temp = head;
+
+        while (temp) {
+            count++;
+            temp = temp->next;
+        }
+    }
